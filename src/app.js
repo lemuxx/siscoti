@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 //routes
-require('./routes/userRoutes')(app);
+require('./routes/clientRoutes')(app);
 
 app.listen(app.get('port'), () => {
 	console.log('server on port 3000');

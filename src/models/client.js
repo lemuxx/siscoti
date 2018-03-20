@@ -3,15 +3,15 @@ conection = mysql.createConnection({
 	host: 'localhost',
 	user: 'root',
 	password: '',
-	database: 'testapi'
+	database: 'siscoti'
 });
 
-let userModel = {};
+let clientModel = {};
 
-userModel.getUsers = (callback) => {
+clientModel.getClients = (callback) => {
 	if(conection){
 		conection.query(
-			'SELECT * FROM usuarios',
+			'SELECT * FROM siscoti_tb_client',
 			(err, rows) => {
 				if(err){
 					throw err;
@@ -24,11 +24,11 @@ userModel.getUsers = (callback) => {
 	}
 };
 
-userModel.insertUser = (userData, callback) => {
+clientModel.insertClient = (clientData, callback) => {
 	if(conection){
 		conection.query(
-			'INSERT INTO usuarios SET ?',
-			userData,
+			'INSERT INTO siscoti_tb_client SET ?',
+			clientData,
 			(err, result) => {
 				if(err){
 					throw err;
@@ -42,16 +42,16 @@ userModel.insertUser = (userData, callback) => {
 		)
 	}
 };
-
-userModel.updateUser = (userData, callback) => {
+clientModel.updateClient = (clientData, callback) => {
 	if(conection){
 		const sql = `
-			UPDATE usuarios SET
-			username = ${conection.escape(userData.username)},
-			mail = ${conection.escape(userData.mail)},
-			pass = ${conection.escape(userData.pass)}
-			WHERE id = ${conection.escape(userData.id)}
+			UPDATE siscoti_tb_client SET
+			name_client = ${conection.escape(clientData.name_client)},
+			mail_client = ${conection.escape(clientData.mail_client)},
+			telephone_client = ${conection.escape(clientData.telephone_client)}
+			WHERE id_client = ${conection.escape(clientData.id_client)}
 		`
+		console.log(sql);
 		conection.query(sql, (err, result) => {
 			if(err){
 				throw err;
@@ -63,5 +63,4 @@ userModel.updateUser = (userData, callback) => {
 		})
 	}
 };
-
-module.exports = userModel;
+module.exports = clientModel;
