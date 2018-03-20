@@ -1,4 +1,5 @@
 const user = require('../models/user');
+
 module.exports = function (app){
 
 	app.get('/', (req, res) => {
@@ -9,9 +10,9 @@ module.exports = function (app){
 
 	app.post('/users', (req, res) => {
 		const userData = {
-			id: null,
-			username: req.body.username,
-			mail: req.body.mail,
+			id: null;
+			userName = req.body.username,
+			mail = req.body.mail,
 			pass: req.body.pass
 		}
 		user.insertUser(userData, (err, data) => {
@@ -22,15 +23,14 @@ module.exports = function (app){
 					data: data
 				})
 			}
-		});
-
+		})
 	});
 
 	app.put('/users/:id', (req, res) => {
 		const userData = {
 			id: req.params.id,
-			username: req.body.username,
-			mail: req.body.mail,
+			userName = req.body.username,
+			mail = req.body.mail,
 			pass: req.body.pass
 		}
 
@@ -46,4 +46,5 @@ module.exports = function (app){
 			}
 		})
 	});
+
 }
