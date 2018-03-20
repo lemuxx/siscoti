@@ -10,9 +10,9 @@ module.exports = function (app){
 
 	app.post('/users', (req, res) => {
 		const userData = {
-			id: null;
-			userName = req.body.username,
-			mail = req.body.mail,
+			id: null,
+			userName: req.body.username,
+			mail: req.body.mail,
 			pass: req.body.pass
 		}
 		user.insertUser(userData, (err, data) => {
@@ -29,8 +29,8 @@ module.exports = function (app){
 	app.put('/users/:id', (req, res) => {
 		const userData = {
 			id: req.params.id,
-			userName = req.body.username,
-			mail = req.body.mail,
+			userName: req.body.username,
+			mail: req.body.mail,
 			pass: req.body.pass
 		}
 
