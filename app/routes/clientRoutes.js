@@ -56,18 +56,25 @@ module.exports = function (app){
 			}
 		})
 	});
-app.put('/clients/delete/:id_client', (req, res) => {
-	const clientData = {
-		id_client: req.params.id_client
-	}
-	client.deleteClient(clientData, (err, data) => {
-		if(data && data.succes){
-			res.json({
-				succes: true,
-				msg: 'Client removed',
-				data: data
-			})
+	app.put('/clients/delete/:id_client', (req, res) => {
+		const clientData = {
+			id_client: req.params.id_client
 		}
-	})
-});
+		client.deleteClient(clientData, (err, data) => {
+			if(data && data.succes){
+				res.json({
+					succes: true,
+					msg: 'Client removed',
+					data: data
+				})
+			}
+			else{
+				res.json({
+					succes: true,
+					msg: 'Client not removed',
+					data: data
+				})
+			}
+		})
+	});
 }

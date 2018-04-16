@@ -11,6 +11,8 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 //routes
 require('./routes/clientRoutes')(app);
+require('./routes/activityRoutes')(app);
+require('./routes/phaseRoutes')(app);
 
 app.listen(app.get('port'), () => {
 	console.log('server on port ', app.get('port'));

@@ -1,12 +1,12 @@
 const dbConnection = require('../../config/dbConnection');
-let conection = dbConnection();
-
+let connection = dbConnection();
 let clientModel = {};
 
 clientModel.getClients = (callback) => {
-	if(conection){
-		conection.query(
-			'SELECT * FROM siscoti_tb_client',
+	const status_client = 1;
+	if(connection){
+		connection.query(
+			'SELECT * FROM siscoti_tb_client WHERE status_client = ?', [status_client],
 			(err, rows) => {
 				if(err){
 					throw err;
@@ -20,8 +20,8 @@ clientModel.getClients = (callback) => {
 };
 
 clientModel.insertClient = (clientData, callback) => {
-	if(conection){
-		conection.query(
+	if(connection){
+		connection.query(
 			'INSERT INTO siscoti_tb_client SET ?',
 			clientData,
 			(err, result) => {
@@ -38,15 +38,20 @@ clientModel.insertClient = (clientData, callback) => {
 	}
 };
 clientModel.updateClient = (clientData, callback) => {
-	if(conection){
+	if(connection){
 		const sql = `
 			UPDATE siscoti_tb_client SET
-			name_client = ${conection.escape(clientData.name_client)},
-			mail_client = ${conection.escape(clientData.mail_client)},
-			telephone_client = ${conection.escape(clientData.telephone_client)}
-			WHERE id_client = ${conection.escape(clientData.id_client)}
+			name_client = ?,
+			mail_client = ?,
+			telephone_client = ?
+			WHERE id_client = ?
 		`
-		conection.query(sql, (err, result) => {
+		console.log(clientData.id_client);
+		connection.query(sql, [clientData.name_client,
+													clientData.mail_client,
+													clientData.telephone_client,
+													clientData.id_client],
+		(err, result) => {
 			if(err){
 				throw err;
 			}else{
@@ -59,13 +64,15 @@ clientModel.updateClient = (clientData, callback) => {
 };
 clientModel.deleteClient = (clientData, callback) => {
 	const changeStatus = 0;
-	if(conection){
+	if(connection){
 		const sql = `
 			UPDATE siscoti_tb_client SET
-			status_client = ${conection.escape(changeStatus)}
-			WHERE id_client = ${conection.escape(clientData.id_client)}
+			status_client = ?
+			WHERE id_client = ?
 		`
-		conection.query(sql, (err, result) => {
+		connection.query(sql, [changeStatus,
+													clientData.id_client],
+		(err, result) => {
 			if(err){
 				throw err;
 			}else{
