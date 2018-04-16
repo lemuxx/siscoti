@@ -1,10 +1,5 @@
-const mysql = require('mysql');
-conection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: '',
-	database: 'siscoti'
-});
+const dbConnection = require('../../config/dbConnection');
+let conection = dbConnection();
 
 let clientModel = {};
 
@@ -35,7 +30,7 @@ clientModel.insertClient = (clientData, callback) => {
 				}
 				else{
 					callback(null, {
-						'insertId': result.insertId
+						'success': true
 					})
 				}
 			}
@@ -51,16 +46,35 @@ clientModel.updateClient = (clientData, callback) => {
 			telephone_client = ${conection.escape(clientData.telephone_client)}
 			WHERE id_client = ${conection.escape(clientData.id_client)}
 		`
-		console.log(sql);
 		conection.query(sql, (err, result) => {
 			if(err){
 				throw err;
 			}else{
 				callback(null, {
-					"msg": "succes"
+					"success": true
 				});
 			}
 		})
 	}
 };
+clientModel.deleteClient = (clientData, callback) => {
+	const changeStatus = 0;
+	if(conection){
+		const sql = `
+			UPDATE siscoti_tb_client SET
+			status_client = ${conection.escape(changeStatus)}
+			WHERE id_client = ${conection.escape(clientData.id_client)}
+		`
+		conection.query(sql, (err, result) => {
+			if(err){
+				throw err;
+			}else{
+				callback(null, {
+					"succes": true
+				});
+			}
+		})
+	}
+};
+
 module.exports = clientModel;

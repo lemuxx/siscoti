@@ -2,7 +2,7 @@ const client = require('../models/client');
 
 module.exports = function (app){
 
-	app.get('/', (req, res) => {
+	app.get('/clients', (req, res) => {
 		client.getClients((err, data) => {
 			res.json(data);
 		});
@@ -16,10 +16,16 @@ module.exports = function (app){
 			telephone_client: req.body.telephone_client
 		}
 		client.insertClient(clientData, (err, data) => {
-			if(data && data.insertId){
+			if(data && data.succes){
 				res.json({
 					success: true,
-					msg: 'Usuario insertado',
+					msg: 'client inserted',
+					data: data
+				})
+			}else{
+				res.json({
+					success: false,
+					msg: 'Client not inserted',
 					data: data
 				})
 			}
@@ -33,18 +39,35 @@ module.exports = function (app){
 			mail_client: req.body.mail_client,
 			telephone_client: req.body.telephone_client
 		}
-
 		client.updateClient(clientData, (err, data) => {
-			if(data && data.msg){
-				res.json(data);
+			if(data && data.succes){
+				res.json({
+					success: true,
+					msg: 'Client updated',
+					data: data
+				})
 			}
 			else{
 				res.json({
 					success: false,
-					msg: "error"
-				});
+					msg: 'Client not updated',
+					data: data
+				})
 			}
 		})
 	});
-
+app.put('/clients/delete/:id_client', (req, res) => {
+	const clientData = {
+		id_client: req.params.id_client
+	}
+	client.deleteClient(clientData, (err, data) => {
+		if(data && data.succes){
+			res.json({
+				succes: true,
+				msg: 'Client removed',
+				data: data
+			})
+		}
+	})
+});
 }
