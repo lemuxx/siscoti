@@ -1,12 +1,12 @@
-const dbConnection = require('../../config/dbConnection')
-const connection = dbConnection();
-const proyectModel = {};
+const dbConnection = require("../../config/dbConnection");
+let connection = dbConnection();
+let proyectModel = {};
 
 proyectModel.getProyects = (callback) => {
   const status_proyect = 1;
   if(connection){
     connection.query(
-      'SELECT * FROM siscoti_tb_phase WHERE status_proyect = ?', [status_proyect],
+      'SELECT * FROM siscoti_tb_proyect WHERE status_proyect = ?', [status_proyect],
       (err, rows) => {
         if(err){
           throw err;
@@ -20,7 +20,7 @@ proyectModel.getProyects = (callback) => {
 
 proyectModel.insertProyect = (proyectData, callback) => {
   if(connection){
-      connection.query('INSERT INTO siscoti_tb_phase SET ?',
+      connection.query('INSERT INTO siscoti_tb_proyect SET ?',
       proyectData,
       (err, result) => {
         if(err){

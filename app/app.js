@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 require('./routes/clientRoutes')(app);
 require('./routes/activityRoutes')(app);
 require('./routes/phaseRoutes')(app);
+require('./routes/proyectRoutes')(app);
 
 app.listen(app.get('port'), () => {
 	console.log('server on port ', app.get('port'));

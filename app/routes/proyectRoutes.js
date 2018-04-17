@@ -2,7 +2,7 @@ const proyect = require('../models/proyect');
 
 module.exports = function(app){
 
-  app.get('/proyects', () => {
+  app.get('/proyects', (req, res) => {
     proyect.getProyects((err, data) => {
       res.json(data);
     });
@@ -16,7 +16,7 @@ module.exports = function(app){
       total_hours_proyect: req.body.total_hours_proyect,
       total_cost_proyect: req.body.total_cost_proyect
     }
-    proyectData.insertProyect(proyectData, (err, data) => {
+    proyect.insertProyect(proyectData, (err, data) => {
       if(data && data.succes){
         res.json({
           succes: true,
@@ -24,9 +24,11 @@ module.exports = function(app){
           data: data
         })
       }else{
-        succes: false,
-        msg: 'Proyect not inserted',
-        data: data
+        res.json({
+          succes: false,
+          msg: 'Proyect not inserted',
+          data: data
+        })
       }
     })
   });
@@ -39,7 +41,7 @@ module.exports = function(app){
       total_hours_proyect: req.body.total_hours_proyect,
       total_cost_proyect: req.body.total_cost_proyect
     }
-    proyectData.updateProyect(proyectData, (err, data) => {
+    proyect.updateProyect(proyectData, (err, data) => {
       if(data && data.succes){
         res.json({
           succes: true,
@@ -61,7 +63,7 @@ module.exports = function(app){
       id_proyect: req.params.id_proyect,
       status_proyect: req.body.status_proyect
     }
-    proyectData.deleteProyect(proyectData, (err, res) => {
+    proyect.deleteProyect(proyectData, (err, data) => {
       if(data && data.succes){
         res.json({
           succes: true,
