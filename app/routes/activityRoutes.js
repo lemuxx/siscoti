@@ -12,7 +12,8 @@ module.exports = function(app){
     const activityData = {
       id_activity: null,
       name_activity: req.body.name_activity,
-      description_activity: req.body.description_activity
+      description_activity: req.body.description_activity,
+      id_phase: req.body.id_phase
     }
     activity.insertActivity(activityData, (err, data) => {
       if(data && data.succes){
@@ -36,7 +37,8 @@ module.exports = function(app){
     const activityData = {
       id_activity: req.params.id_activity,
       name_activity: req.body.name_activity,
-      description_activity: req.body.description_activity
+      description_activity: req.body.description_activity,
+      id_phase: req.body.id_phase
     }
     console.log(activityData);
     activity.updateActivity(activityData, (err, data) => {

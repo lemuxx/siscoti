@@ -14,7 +14,8 @@ module.exports = function(app){
       name_proyect: req.body.name_proyect,
       description_proyect: req.body.description_proyect,
       total_hours_proyect: req.body.total_hours_proyect,
-      total_cost_proyect: req.body.total_cost_proyect
+      total_cost_proyect: req.body.total_cost_proyect,
+      id_client: req.body.id_client
     }
     proyect.insertProyect(proyectData, (err, data) => {
       if(data && data.succes){
@@ -39,7 +40,8 @@ module.exports = function(app){
       name_proyect: req.body.name_proyect,
       description_proyect: req.body.description_proyect,
       total_hours_proyect: req.body.total_hours_proyect,
-      total_cost_proyect: req.body.total_cost_proyect
+      total_cost_proyect: req.body.total_cost_proyect,
+      id_client: req.body.id_client
     }
     proyect.updateProyect(proyectData, (err, data) => {
       if(data && data.succes){
