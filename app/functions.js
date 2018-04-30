@@ -4,15 +4,27 @@ let connection = dbConnection();
 let functions = {};
 
 functions.numberOfPhasesFunction = (callback) => {
-  let aux;
   if(connection){
     connection.query(
       'SELECT count(*) from siscoti_tb_phase;',
       (err, rows) => {
         if(err){
           throw err;
+        }else{
+          callback(null, rows);
         }
-        else{
+      }
+    )
+  }
+}
+
+functions.numberOfActivitiesFunction = (callback) => {
+  if(connection){
+    connection.query('SELECT * FROM siscoti_tb_activity',
+    (err, rows) => {
+        if(err){
+          throw err;
+        }else{
           callback(null, rows);
         }
       }
