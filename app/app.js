@@ -15,6 +15,8 @@ require('./routes/activityRoutes')(app);
 require('./routes/phaseRoutes')(app);
 require('./routes/proyectRoutes')(app);
 require('./routes/activityProyectRoutes')(app);
+require('./routes/neuralNetworkRoutes')(app);
+require('./routes/userRoutes')(app);
 
 app.listen(app.get('port'), () => {
 	console.log('server on port ', app.get('port'));

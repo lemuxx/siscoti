@@ -70,7 +70,7 @@ module.exports = function (app){
 			}
 			else{
 				res.json({
-					succes: true,
+					succes: false,
 					msg: 'Client not removed',
 					data: data
 				})

@@ -1,4 +1,4 @@
-const dbConnection = require("../config/dbConnection");
+const dbConnection = require('../../config/dbConnection');
 let sync = require('synchronize');
 let connection = dbConnection();
 let functions = {};
