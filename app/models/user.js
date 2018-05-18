@@ -11,6 +11,7 @@ userModel.getUsers = (callback) => {
         if(err){
           throw err;
         }else{
+          console.log(rows);
           callback(null, rows);
         }
       }
@@ -44,10 +45,12 @@ userModel.updateUser = (userData, callback) => {
       name_user = ?,
       mail_user = ?,
       telephone_user = ?
+      WHERE id_user = ?
     `
     connection.query(sql, [userData.name_user,
                           userData.mail_user,
-                          userData.telephone_user],
+                          userData.telephone_user,
+                          userData.id_user],
     (err, result) => {
       if(err){
         throw err;
