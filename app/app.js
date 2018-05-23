@@ -15,8 +15,8 @@ app.use(cors.permission)
 require('./routes/clientRoutes')(app);
 require('./routes/activityRoutes')(app);
 require('./routes/phaseRoutes')(app);
-require('./routes/proyectRoutes')(app);
-require('./routes/activityProyectRoutes')(app);
+require('./routes/projectRoutes')(app);
+require('./routes/activityProjectRoutes')(app);
 require('./routes/neuralNetworkRoutes')(app);
 require('./routes/userRoutes')(app);
 

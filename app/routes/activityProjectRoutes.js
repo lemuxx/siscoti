@@ -1,13 +1,13 @@
-const activityProyect = require("../models/activityProyect");
+const activityProject = require("../models/activityproject");
 
 module.exports = function(app){
 
-  app.post('/activities_proyect/:id_proyect', (req, res) => {
-    const activityProyectData = {
-      id_proyect: req.params.id_proyect,
-      activitiesProyect: req.body
+  app.post('/activities_project/:id_project', (req, res) => {
+    const activityProjectData = {
+      id_project: req.params.id_project,
+      activitiesProject: req.body
     }
-    activityProyect.insertActivityProyect(activityProyectData, (err, data) => {
+    activityProject.insertActivityProject(activityProjectData, (err, data) => {
       if(data && data.succes){
         res.json({
           succes: true,
